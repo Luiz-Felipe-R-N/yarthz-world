@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
+#include <windows.h>
 
 //linhas e colunas da matriz (para o enredo)
 #define LINHA 40
@@ -166,7 +167,7 @@ void encontrar(int opct){ //função consome um ítem da bagagem e não mostra s
             if (strcmp(auxiliar->nome_item,"(+) Porção") == 0){ //se o ítem for a porção
                 rmv_qtd("(+) Porção"); //remove 1 unidade da porção
                 printf("\n1 (+) Porção usada, a vida do personagem aumenta + 10\n"); //informação ao usuário
-                usleep(3000000); //tempo de espera para o usuário ver a mensagem
+                Sleep(3000); //tempo de espera para o usuário ver a mensagem
                 system("cls"); //limpar a tela
                 personagem.vida = personagem.vida + 10; //a vida do personagem aumenta 10 pontos
 
@@ -174,7 +175,7 @@ void encontrar(int opct){ //função consome um ítem da bagagem e não mostra s
             else if (strcmp(auxiliar->nome_item,"(^) Antídoto") == 0){ //se o ítem for o antídoto
                 rmv_qtd("(^) Antídoto"); // remove 1 unidade do antídoto
                 printf("\n1 (^) Antídoto usado, o personagem não está mais envenenado\n"); //informação ao usuário
-                usleep(3000000); //tempo de espera para o usuário ver a mensagem
+                Sleep(3000); //tempo de espera para o usuário ver a mensagem
                 system("cls"); //limpar tela
                 if (personagem.envenenamento == 1){
                     personagem.envenenamento = personagem.envenenamento - 1; //torna o estatus de envenenamento para zero
@@ -187,7 +188,7 @@ void encontrar(int opct){ //função consome um ítem da bagagem e não mostra s
             else if(strcmp(auxiliar->nome_item,"(º) Bracelete Imperial") == 0){
                 rmv_qtd("(º) Bracelete Imperial");
                 printf("\n1 Bracelete Imperial usado, seu ataque e defesa aumentaram temporariamente\n");
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 personagem.ataque = personagem.ataque + 1;
                 personagem.defesa = personagem.defesa + 1;
@@ -195,7 +196,7 @@ void encontrar(int opct){ //função consome um ítem da bagagem e não mostra s
             else if (strcmp(auxiliar->nome_item,"(§) Poder Ancestral") == 0){
                 rmv_qtd("(§) Poder Ancestral");
                 printf("\n O poder ancestral foi usado, o dano é maior com esse ataque");
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 personagem.especial = personagem.especial - 1;
 
@@ -204,7 +205,7 @@ void encontrar(int opct){ //função consome um ítem da bagagem e não mostra s
     }
     else{
         printf("\nNão existe esse ítem\n"); //se o ítem não se encontrar na lista
-        usleep(3000000);
+        Sleep(3000);
         system("cls");
     }
 }
@@ -290,7 +291,7 @@ void escolher_nome(char *nome){ //funçãode escolher o nome do personagem
                     system("cls");
                     printf("\nSeja bem vindo ao mundo de Yarthz %s", personagem.nome);
                     fflush(stdout); //stdout sempre vem depois!
-                    sleep(4);
+                    Sleep(4);
                     system("cls");
                     confirmar = 'o';
                     
@@ -420,7 +421,7 @@ void menu_fase(int fase){ //função que contém o menu das fases
 
 void invalido(){ //função  que mostra um alerta de opção inválida
     printf("\nEntrada inválida, tente novamente!\n");
-    usleep(2000000);
+    Sleep(2000);
     system("cls");
 }
 
@@ -462,7 +463,7 @@ void substitui_nome(char *nomearq){   //recebe o nome do arquivo
             }
             printf(" %s", separador); //cada sub string do arquivo será exibido
             fflush(stdout);
-            usleep(300000);
+            Sleep(300000);
             separador = strtok(NULL, " ");
         }
     }
@@ -471,7 +472,7 @@ void substitui_nome(char *nomearq){   //recebe o nome do arquivo
 
 
 void espera_padrao(){ //espera padrão para frames das animações do jogo
-    usleep(200000);
+    Sleep(200000);
     system("cls");
 }
 
@@ -481,7 +482,7 @@ void matriz_enredo(char *mat[6][18]){ //matriz que gerará o enrendo (história)
         for(c = 0; c < 18; c++){
             printf("%s", mat[l][c]);
             fflush(stdout);
-            usleep(300000);
+            Sleep(300000);
         }
         puts("");
     }
@@ -756,7 +757,7 @@ int main(){ //principal
             else if(entrada_menu == '4'){
                 printf("\nSAINDO...");
                 fflush(stdout);
-                sleep(3);
+                Sleep(3);
                 system("cls");
                 sair = 1;
             }
@@ -769,11 +770,11 @@ int main(){ //principal
                 system("cls");
 
                 substitui_nome("historia/intro.txt"); //história antes da fase 1
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 substitui_nome("historia/hfase1.txt"); //história antes da fase 1
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //turno
@@ -813,7 +814,7 @@ int main(){ //principal
                 printf("║                     CEMITÉRIO DAS BESTAS                       ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
 
@@ -1008,7 +1009,7 @@ int main(){ //principal
                 }
                 if (personagem.vida <= 0 && boss.vida >=0){ //configuração do game over
                     printf("\nGAME OVER\n");
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -1016,7 +1017,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -1029,20 +1030,20 @@ int main(){ //principal
                 char f2_ef1[] = "fase1/f2_ef1.txt";
                 char ganhosf1[] = "fase1/ganhosf1.txt";
                 ler_arq(f1_ef1);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f2_ef1);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf1);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //zerar turno
@@ -1051,7 +1052,7 @@ int main(){ //principal
                 adcionar("(+) Porção", 5, 0); //adcionada a porção
 
                 substitui_nome("historia/hfase2.txt"); //história antes da fase 2
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //abertura da fase 2
@@ -1073,7 +1074,7 @@ int main(){ //principal
                 printf("║                     O APARECIMENTO DO REI                      ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 //características do personagem e doi boss na fase 2
@@ -1271,7 +1272,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -1279,7 +1280,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -1292,20 +1293,20 @@ int main(){ //principal
                 char ganhosf2[] = "fase2/ganhosf2.txt";
 
                 ler_arq(f2_f1_ef2);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f2_f2_ef2);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf2);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //zerar turno
@@ -1314,7 +1315,7 @@ int main(){ //principal
                 adcionar("(^) Antídoto", 1, 0);
 
                 substitui_nome("historia/hfase3.txt"); //história antes da fase 3
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //abertura da fase 3
@@ -1335,7 +1336,7 @@ int main(){ //principal
                 printf("║                     DESERTO DE SABLEYNOIR                      ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 //definindo características do personagem e do boss na fase 3
@@ -1392,7 +1393,7 @@ int main(){ //principal
                                 if (personagem.envenenamento == 0){
                                     printf("\nVocê foi envenenado\n");
                                     personagem.envenenamento = 1;
-                                    usleep(2000000);
+                                    Sleep(2000);
                                     system("cls");
                                     turno = 0;
                                     continue;
@@ -1588,7 +1589,7 @@ int main(){ //principal
                             personagem.vida = personagem.vida - 2;
                             printf("\nVocê está sofrendo com os efeitos do envenenamento\n");
                             printf("Você perdeu -2 de vida\n");
-                            usleep(2000000);
+                            Sleep(2000);
                             system("cls");
                             continue;
                         }
@@ -1603,7 +1604,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -1611,7 +1612,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -1627,20 +1628,20 @@ int main(){ //principal
                 char ganhosf3[] = "fase3/ganhosf3.txt";
 
                 ler_arq(f3_f1_ef3);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f3_f2_ef3);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf3);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //zerar turno
@@ -1650,7 +1651,7 @@ int main(){ //principal
                 adc_qtd("(+) Porção");
 
                 substitui_nome("historia/hfase4.txt"); //história antes da fase 4
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //abertura da fase 4
@@ -1672,7 +1673,7 @@ int main(){ //principal
                 printf("║                      CAVERNA DE HASHMUTE                       ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 //características do personagem e do boss na fase 4
@@ -1733,7 +1734,7 @@ int main(){ //principal
                                 //dano do ataque especial
                                 printf("O inimigo lhe causou um dano a mais\n");
                                 printf("Você perdeu 2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 personagem.vida = personagem.vida - 2;
 
@@ -1939,7 +1940,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over 
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -1947,7 +1948,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -1958,20 +1959,20 @@ int main(){ //principal
                 char f4_f2_ef4[] = "fase4/f4_f2_ef4.txt";
                 char ganhosf4[] = "fase4/ganhosf4.txt";
                 ler_arq(f4_f1_ef4);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f4_f2_ef4);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf4);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //turno zera
@@ -1980,7 +1981,7 @@ int main(){ //principal
                 adcionar("(º) Bracelete Imperial", 1, 0);
 
                 substitui_nome("historia/hfase5.txt"); //história antes da fase 5
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //abertura da fase
@@ -2002,7 +2003,7 @@ int main(){ //principal
                 printf("║                         RUÍNAS SAGRADAS                        ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 
@@ -2059,7 +2060,7 @@ int main(){ //principal
                                 if (personagem.envenenamento == 0){
                                     printf("\nVocê foi envenenado\n");
                                     personagem.envenenamento = 1;
-                                    usleep(2000000);
+                                    Sleep(2000);
                                     system("cls");
                                     turno = 0;
                                     continue;
@@ -2255,7 +2256,7 @@ int main(){ //principal
 
                         else if (entrada == '5'){ //opção de poder especial
                             printf("\n Você ainda não está pronto para utilizar esse poder!");
-                            sleep(3);
+                            Sleep(3);
 
                         }
 
@@ -2268,7 +2269,7 @@ int main(){ //principal
                             personagem.vida = personagem.vida - 2;
                             printf("\nVocê está sofrendo com os efeitos do envenenamento\n");
                             printf("Você perdeu -2 de vida\n");
-                            usleep(2000000);
+                            Sleep(2000);
                             system("cls");
                         }
                     }
@@ -2283,7 +2284,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -2291,7 +2292,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -2306,20 +2307,20 @@ int main(){ //principal
                 char ganhosf5[] = "fase5/ganhosf5.txt";
 
                 ler_arq(f5_f1_ef5);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f5_f2_ef5);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf5);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); 
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //turno zera
@@ -2329,7 +2330,7 @@ int main(){ //principal
                 adc_qtd("(^) Antídoto");
 
                 substitui_nome("historia/hfase6.txt"); //história antes da fase 6
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 //abertura da fase 6
@@ -2350,7 +2351,7 @@ int main(){ //principal
                 printf("║                       CAVERNA MISTERIOSA                       ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 //características do personagem e do boss na fase 6
@@ -2409,7 +2410,7 @@ int main(){ //principal
                                 //dano do ataque especial
                                 printf("O inimigo lhe causou um dano a mais\n");
                                 printf("Você perdeu 2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 personagem.vida = personagem.vida - 2;
 
@@ -2612,7 +2613,7 @@ int main(){ //principal
 
                         else if (entrada == '5'){ //opção de poder especial
                             printf("\n Você ainda não está pronto para utilizar esse poder!");
-                            sleep(3);
+                            Sleep(3);
 
                         }
 
@@ -2632,7 +2633,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -2640,7 +2641,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -2652,20 +2653,20 @@ int main(){ //principal
                 char f6_f2_ef6[] = "fase6/f6_f2_ef6.txt";
                 char ganhosf6[] = "fase6/ganhosf6.txt";
                 ler_arq(f6_f1_ef6);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f6_f2_ef6);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
                 ler_arq(ganhosf6);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 turno = 0; //turno zera
@@ -2676,7 +2677,7 @@ int main(){ //principal
                 adc_qtd("(+) Porção");
 
                 substitui_nome("historia/hfase7.txt"); //história antes da fase 7
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
 
@@ -2698,7 +2699,7 @@ int main(){ //principal
                 printf("║                      A ARMADILHA DO XAMÃ                       ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
                 //definindo características do personagem e do boss na fase 7
@@ -2758,7 +2759,7 @@ int main(){ //principal
                                 if (personagem.envenenamento == 0){
                                     printf("\nVocê foi envenenado\n");
                                     personagem.envenenamento = 1;
-                                    usleep(2000000);
+                                    Sleep(2000);
                                     system("cls");
                                     turno = 0;
                                     continue;
@@ -2799,7 +2800,7 @@ int main(){ //principal
                                 //dano do ataque especial
                                 printf("O inimigo lhe causou um dano a mais\n");
                                 printf("Você perdeu 2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 personagem.vida = personagem.vida - 2;
 
@@ -3031,7 +3032,7 @@ int main(){ //principal
                                 //ataque especial do personagem
                                 printf("Você causou um poco a mais de dano\n");
                                 printf("O Boss perdeu -2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 boss.vida = boss.vida - 2;
 
@@ -3085,7 +3086,7 @@ int main(){ //principal
                                 //ataque especial do personagem
                                 printf("Você causou um poco a mais de dano\n");
                                 printf("O Boss perdeu -2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 boss.vida = boss.vida - 2;
 
@@ -3093,7 +3094,7 @@ int main(){ //principal
                                 if (personagem.envenenamento == 0){
                                     printf("\nVocê foi envenenado\n");
                                     personagem.envenenamento = 1;
-                                    usleep(2000000);
+                                    Sleep(2000);
                                     system("cls");
                                     turno = 0;
                                     continue;
@@ -3125,14 +3126,14 @@ int main(){ //principal
                                 //ataque especial do personagem
                                 printf("Você causou um poco a mais de dano\n");
                                 printf("O Boss perdeu -2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 boss.vida = boss.vida - 2;
 
                                 //dano do ataque especial
                                 printf("O inimigo lhe causou um dano a mais\n");
                                 printf("Você perdeu 2 pontos de vida\n");
-                                usleep(2000000);
+                                Sleep(2000);
                                 system("cls");
                                 personagem.vida = personagem.vida - 2;
 
@@ -3143,7 +3144,7 @@ int main(){ //principal
 
                             else{
                                 printf("\n Seu poder ainda não está carregado!\n");
-                                sleep(2);
+                                Sleep(2);
                                 system("cls");
                             }  
 
@@ -3164,7 +3165,7 @@ int main(){ //principal
                             personagem.vida = personagem.vida - 2;
                             printf("\nVocê está sofrendo com os efeitos do envenenamento\n");
                             printf("Você perdeu -2 de vida\n");
-                            usleep(2000000);
+                            Sleep(2000);
                             system("cls");
                             continue;
                         }
@@ -3179,7 +3180,7 @@ int main(){ //principal
                 if (personagem.vida <= 0 && boss.vida >=0){ //game over
                     printf("\nGAME OVER\n");
                     fflush(stdin);
-                    sleep(3);
+                    Sleep(3);
                     system("cls");
                     continue;
                 }
@@ -3187,7 +3188,7 @@ int main(){ //principal
                 else if (personagem.sair == 1){ //sair do jogo
                     personagem.vida = 0;
                     boss.vida = 0;
-                    sleep(1);
+                    Sleep(1);
                     system("cls");
                     continue; 
                 }
@@ -3196,28 +3197,28 @@ int main(){ //principal
                 char f7_f1_ef7[] = "fase7/f7_f1_ef7.txt";
                 char f7_f2_ef7[] = "fase7/f7_f2_ef7.txt";
                 ler_arq(f7_f1_ef7);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
                 ler_arq(f7_f2_ef7);
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
-                usleep(2000000);
+                Sleep(2000);
 
 
                 printf("\n\n E S T Á G I O   C O N C L U Í D O!\n\n"); //configurar animação (boss derrotado e ganho de ítens / história)
-                usleep(3000000);
+                Sleep(3000);
                 system("cls");
 
                 substitui_nome("historia/desfecho.txt"); //desfecho
-                sleep(5);
+                Sleep(5);
                 system("cls");
 
                 printf("╔════════════════════════════════════════════════════════════════╗\n");
                 printf("║                               FIM                              ║\n");
                 printf("╚════════════════════════════════════════════════════════════════╝\n");
                 fflush(stdout);
-                sleep(4);
+                Sleep(4);
                 system("cls");
 
             }
@@ -3236,7 +3237,7 @@ int main(){ //principal
 
     }
     //printf("\nAinda Falta Aprimorar!");
-    usleep(2000000);
+    Sleep(2000);
 
 
     
